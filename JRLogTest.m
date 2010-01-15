@@ -8,9 +8,9 @@
     JRLogSetLogger(debugLogger);
 }
 
-- (MyJRLogMessage*)consumeOnlyMessage {
+- (JRLogCall*)consumeOnlyMessage {
     STAssertEquals([debugLogger->messages count], (unsigned)1, nil);
-    MyJRLogMessage *result = [[[debugLogger->messages objectAtIndex:0] retain] autorelease];
+    JRLogCall *result = [[[debugLogger->messages objectAtIndex:0] retain] autorelease];
     [debugLogger->messages removeLastObject];
     return result;
 }
@@ -20,7 +20,7 @@
     
     JRLogDebug(@"testDebug");
     
-    MyJRLogMessage *logMessage = [self consumeOnlyMessage];
+    JRLogCall *logMessage = [self consumeOnlyMessage];
     STAssertEquals(JRLogLevel_Debug, logMessage->callerLevel, nil);
     STAssertFalse([logMessage->instance rangeOfString:@"JRLogTest"].location == NSNotFound, nil);
     STAssertEqualObjects(@"JRLogTest.m", [[NSString stringWithUTF8String:logMessage->file] lastPathComponent], nil);
@@ -85,7 +85,7 @@
 - (void)testCustomFormatter {
     JRLogDebug(@"testCustomFormatter");
     
-    MyJRLogMessage *logMessage = [self consumeOnlyMessage];
+    JRLogCall *logMessage = [self consumeOnlyMessage];
     STAssertFalse([logMessage->formattedMessage isEqualToString:@"DEBUG"], nil);
     
     JRLogSetFormatter([[[MyFormatter alloc] init] autorelease]);
@@ -104,7 +104,7 @@
 - (void)testFormatterSubclass {
     JRLogDebug(@"testWithoutFormatterSubclass");
     
-    MyJRLogMessage *logMessage = [self consumeOnlyMessage];
+    JRLogCall *logMessage = [self consumeOnlyMessage];
     STAssertFalse([logMessage->formattedMessage hasPrefix:@"SUBCLASS"], nil);
     
     JRLogSetFormatter([[[MyFormatterSubclass alloc] init] autorelease]);
@@ -121,7 +121,7 @@
     
     NSLog(@"testNSLogOverride");
     
-    MyJRLogMessage *logMessage = [self consumeOnlyMessage];
+    JRLogCall *logMessage = [self consumeOnlyMessage];
     STAssertEquals(JRLogLevel_Info, logMessage->callerLevel, nil);
     STAssertFalse([logMessage->instance rangeOfString:@"JRLogTest"].location == NSNotFound, nil);
     STAssertEqualObjects(@"JRLogTest.m", [[NSString stringWithUTF8String:logMessage->file] lastPathComponent], nil);
@@ -136,38 +136,6 @@
 - (void)tearDown {
     JRLogSetLogger(nil);
     [debugLogger release];
-}
-
-@end
-
-@implementation MyJRLogMessage
-
-- (id)initWithLevel:(JRLogLevel)callerLevel_
-           instance:(NSString*)instance_
-               file:(const char*)file_
-               line:(unsigned)line_
-           function:(const char*)function_
-            message:(NSString*)message_
-   formattedMessage:(NSString*)formattedMessage_
-{
-    self = [super init];
-    if (self) {
-        callerLevel = callerLevel_;
-        instance = [instance_ retain];
-        file = file_;
-        line = line_;
-        function = function_;
-        message = [message_ retain];
-        formattedMessage = [formattedMessage_ retain];
-    }
-    return self;
-}
-
-- (void)dealloc {
-    [instance release];
-    [message release];
-    [formattedMessage release];
-    [super dealloc];
 }
 
 @end
@@ -187,40 +155,17 @@
     [super dealloc];
 }
 
-- (void)logWithLevel:(JRLogLevel)callerLevel_
-			instance:(NSString*)instance_
-				file:(const char*)file_
-				line:(unsigned)line_
-			function:(const char*)function_
-			 message:(NSString*)message_;
-{
-    NSString *formattedMessage = [JRLogGetFormatter() formattedMessageWithLevel:callerLevel_
-                                                                       instance:instance_
-                                                                           file:file_
-                                                                           line:line_
-                                                                       function:function_
-                                                                        message:message_];
-    [messages addObject:[[[MyJRLogMessage alloc] initWithLevel:callerLevel_
-                                                      instance:instance_
-                                                          file:file_
-                                                          line:line_
-                                                      function:function_
-                                                       message:message_
-                                              formattedMessage:formattedMessage] autorelease]];
+- (void)logWithCall:(JRLogCall*)call_ {
+    [call_ setFormattedMessage:[JRLogGetFormatter() formattedMessageWithCall:call_]];
+    [messages addObject:call_];
 }
 
 @end
 
 @implementation MyFormatter
 
-- (NSString*)formattedMessageWithLevel:(JRLogLevel)callerLevel_
-                              instance:(NSString*)instance_
-                                  file:(const char*)file_
-                                  line:(unsigned)line_
-                              function:(const char*)function_
-                               message:(NSString*)message_
-{
-    return JRLogLevelNames[callerLevel_];
+- (NSString*)formattedMessageWithCall:(JRLogCall*)call_ {
+    return JRLogLevelNames[call_->callerLevel];
 }
 
 @end
@@ -228,19 +173,8 @@
 
 @implementation MyFormatterSubclass
 
-- (NSString*)formattedMessageWithLevel:(JRLogLevel)callerLevel_
-                              instance:(NSString*)instance_
-                                  file:(const char*)file_
-                                  line:(unsigned)line_
-                              function:(const char*)function_
-                               message:(NSString*)message_
-{
-    return [NSString stringWithFormat:@"SUBCLASS %@", [super formattedMessageWithLevel:callerLevel_
-                                                                              instance:instance_
-                                                                                  file:file_
-                                                                                  line:line_
-                                                                              function:function_
-                                                                               message:message_]];
+- (NSString*)formattedMessageWithCall:(JRLogCall*)call_ {
+    return [NSString stringWithFormat:@"SUBCLASS %@", [super formattedMessageWithCall:call_]];
 }
 
 @end

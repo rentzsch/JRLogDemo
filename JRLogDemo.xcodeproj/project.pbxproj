@@ -22,7 +22,7 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 7960979111005A9900D0024E /* JRLogTest */;
+			remoteGlobalIDString = 7960979111005A9900D0024E;
 			remoteInfo = JRLogTest;
 		};
 /* End PBXContainerItemProxy section */
@@ -40,7 +40,7 @@
 		7952C6FB0B4BB63A005E7CB1 /* JRLog.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; name = JRLog.m; path = JRLog/JRLog.m; sourceTree = "<group>"; };
 		795A7F90099D0E3600450061 /* AppController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppController.h; sourceTree = "<group>"; };
 		795A7F91099D0E3600450061 /* AppController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppController.m; sourceTree = "<group>"; };
-		7960979211005A9900D0024E /* JRLogTest.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = JRLogTest.octest; path = build/Debug/JRLogTest.octest; sourceTree = "<group>"; };
+		7960979211005A9900D0024E /* JRLogTest.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JRLogTest.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7960979311005A9900D0024E /* JRLogTest-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "JRLogTest-Info.plist"; sourceTree = "<group>"; };
 		7960979A11005ADC00D0024E /* JRLogTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JRLogTest.h; sourceTree = "<group>"; };
 		7960979B11005ADC00D0024E /* JRLogTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JRLogTest.m; sourceTree = "<group>"; };
