@@ -9,11 +9,23 @@
 /* Begin PBXBuildFile section */
 		7952C6FC0B4BB63A005E7CB1 /* JRLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 7952C6FB0B4BB63A005E7CB1 /* JRLog.m */; };
 		795A7F92099D0E3600450061 /* AppController.m in Sources */ = {isa = PBXBuildFile; fileRef = 795A7F91099D0E3600450061 /* AppController.m */; };
+		7960979C11005ADC00D0024E /* JRLogTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7960979B11005ADC00D0024E /* JRLogTest.m */; };
+		796097A811005BDC00D0024E /* JRLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 7952C6FB0B4BB63A005E7CB1 /* JRLog.m */; };
 		8D11072A0486CEB800E47090 /* MainMenu.nib in Resources */ = {isa = PBXBuildFile; fileRef = 29B97318FDCFA39411CA2CEA /* MainMenu.nib */; };
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		7960979711005AAC00D0024E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 7960979111005A9900D0024E /* JRLogTest */;
+			remoteInfo = JRLogTest;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		089C165DFE840E0CC02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -28,11 +40,22 @@
 		7952C6FB0B4BB63A005E7CB1 /* JRLog.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; name = JRLog.m; path = JRLog/JRLog.m; sourceTree = "<group>"; };
 		795A7F90099D0E3600450061 /* AppController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppController.h; sourceTree = "<group>"; };
 		795A7F91099D0E3600450061 /* AppController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppController.m; sourceTree = "<group>"; };
+		7960979211005A9900D0024E /* JRLogTest.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = JRLogTest.octest; path = build/Debug/JRLogTest.octest; sourceTree = "<group>"; };
+		7960979311005A9900D0024E /* JRLogTest-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "JRLogTest-Info.plist"; sourceTree = "<group>"; };
+		7960979A11005ADC00D0024E /* JRLogTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JRLogTest.h; sourceTree = "<group>"; };
+		7960979B11005ADC00D0024E /* JRLogTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JRLogTest.m; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* JRLogDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JRLogDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		7960978F11005A9900D0024E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8D11072E0486CEB800E47090 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -77,6 +100,7 @@
 			isa = PBXGroup;
 			children = (
 				8D1107320486CEB800E47090 /* JRLogDemo.app */,
+				7960979211005A9900D0024E /* JRLogTest.octest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -85,10 +109,12 @@
 			isa = PBXGroup;
 			children = (
 				080E96DDFE201D6D7F000001 /* Classes */,
+				7960979911005AB500D0024E /* Tests */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
+				7960979311005A9900D0024E /* JRLogTest-Info.plist */,
 			);
 			name = JRLogDemo;
 			sourceTree = "<group>";
@@ -121,9 +147,36 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		7960979911005AB500D0024E /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				7960979A11005ADC00D0024E /* JRLogTest.h */,
+				7960979B11005ADC00D0024E /* JRLogTest.m */,
+			);
+			name = Tests;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		7960979111005A9900D0024E /* JRLogTest */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7960979611005A9A00D0024E /* Build configuration list for PBXNativeTarget "JRLogTest" */;
+			buildPhases = (
+				7960978D11005A9900D0024E /* Resources */,
+				7960978E11005A9900D0024E /* Sources */,
+				7960978F11005A9900D0024E /* Frameworks */,
+				7960979011005A9900D0024E /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = JRLogTest;
+			productName = JRLogTest;
+			productReference = 7960979211005A9900D0024E /* JRLogTest.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
 		8D1107260486CEB800E47090 /* JRLogDemo */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = C01FCF4A08A954540054247B /* Build configuration list for PBXNativeTarget "JRLogDemo" */;
@@ -135,6 +188,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				7960979811005AAC00D0024E /* PBXTargetDependency */,
 			);
 			name = JRLogDemo;
 			productInstallPath = "$(HOME)/Applications";
@@ -155,11 +209,19 @@
 			projectRoot = "";
 			targets = (
 				8D1107260486CEB800E47090 /* JRLogDemo */,
+				7960979111005A9900D0024E /* JRLogTest */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		7960978D11005A9900D0024E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8D1107290486CEB800E47090 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -171,7 +233,32 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		7960979011005A9900D0024E /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
+		7960978E11005A9900D0024E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7960979C11005ADC00D0024E /* JRLogTest.m in Sources */,
+				796097A811005BDC00D0024E /* JRLog.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8D11072C0486CEB800E47090 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -183,6 +270,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		7960979811005AAC00D0024E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 7960979111005A9900D0024E /* JRLogTest */;
+			targetProxy = 7960979711005AAC00D0024E /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		089C165CFE840E0CC02AAC07 /* InfoPlist.strings */ = {
@@ -204,6 +299,60 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		7960979411005A9A00D0024E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = "$(DEVELOPER_LIBRARY_DIR)/Frameworks";
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/Cocoa.framework/Headers/Cocoa.h";
+				INFOPLIST_FILE = "JRLogTest-Info.plist";
+				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Bundles";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Cocoa,
+					"-framework",
+					SenTestingKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = JRLogTest;
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		7960979511005A9A00D0024E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				FRAMEWORK_SEARCH_PATHS = "$(DEVELOPER_LIBRARY_DIR)/Frameworks";
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/Cocoa.framework/Headers/Cocoa.h";
+				INFOPLIST_FILE = "JRLogTest-Info.plist";
+				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Bundles";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Cocoa,
+					"-framework",
+					SenTestingKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = JRLogTest;
+				WRAPPER_EXTENSION = octest;
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
 		C01FCF4B08A954540054247B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -261,6 +410,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		7960979611005A9A00D0024E /* Build configuration list for PBXNativeTarget "JRLogTest" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7960979411005A9A00D0024E /* Debug */,
+				7960979511005A9A00D0024E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		C01FCF4A08A954540054247B /* Build configuration list for PBXNativeTarget "JRLogDemo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
