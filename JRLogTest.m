@@ -1,6 +1,5 @@
 #import "JRLogTest.h"
 
-
 @implementation JRLogTest
 
 - (void)setUp {
@@ -24,7 +23,7 @@
     STAssertEquals(JRLogLevel_Debug, logMessage->callerLevel, nil);
     STAssertFalse([logMessage->instance rangeOfString:@"JRLogTest"].location == NSNotFound, nil);
     STAssertEqualObjects(@"JRLogTest.m", [[NSString stringWithUTF8String:logMessage->file] lastPathComponent], nil);
-    STAssertEquals((unsigned)21, logMessage->line, nil);
+    STAssertEquals((unsigned)__LINE__-6, logMessage->line, nil);
     STAssertEqualObjects(@"-[JRLogTest testLevels]", [NSString stringWithUTF8String:logMessage->function], nil);
     STAssertEqualObjects(@"testDebug", logMessage->message, nil);
     STAssertTrue([logMessage->formattedMessage length] > [logMessage->message length], nil);
@@ -37,7 +36,7 @@
     STAssertEquals(JRLogLevel_Info, logMessage->callerLevel, nil);
     STAssertFalse([logMessage->instance rangeOfString:@"JRLogTest"].location == NSNotFound, nil);
     STAssertEqualObjects(@"JRLogTest.m", [[NSString stringWithUTF8String:logMessage->file] lastPathComponent], nil);
-    STAssertEquals((unsigned)34, logMessage->line, nil);
+    STAssertEquals((unsigned)__LINE__-6, logMessage->line, nil);
     STAssertEqualObjects(@"-[JRLogTest testLevels]", [NSString stringWithUTF8String:logMessage->function], nil);
     STAssertEqualObjects(@"testInfo", logMessage->message, nil);
     STAssertTrue([logMessage->formattedMessage length] > [logMessage->message length], nil);
@@ -49,7 +48,7 @@
     STAssertEquals(JRLogLevel_Warn, logMessage->callerLevel, nil);
     STAssertFalse([logMessage->instance rangeOfString:@"JRLogTest"].location == NSNotFound, nil);
     STAssertEqualObjects(@"JRLogTest.m", [[NSString stringWithUTF8String:logMessage->file] lastPathComponent], nil);
-    STAssertEquals((unsigned)46, logMessage->line, nil);
+    STAssertEquals((unsigned)__LINE__-6, logMessage->line, nil);
     STAssertEqualObjects(@"-[JRLogTest testLevels]", [NSString stringWithUTF8String:logMessage->function], nil);
     STAssertEqualObjects(@"testWarn", logMessage->message, nil);
     STAssertTrue([logMessage->formattedMessage length] > [logMessage->message length], nil);
@@ -61,11 +60,23 @@
     STAssertEquals(JRLogLevel_Error, logMessage->callerLevel, nil);
     STAssertFalse([logMessage->instance rangeOfString:@"JRLogTest"].location == NSNotFound, nil);
     STAssertEqualObjects(@"JRLogTest.m", [[NSString stringWithUTF8String:logMessage->file] lastPathComponent], nil);
-    STAssertEquals((unsigned)58, logMessage->line, nil);
+    STAssertEquals((unsigned)__LINE__-6, logMessage->line, nil);
     STAssertEqualObjects(@"-[JRLogTest testLevels]", [NSString stringWithUTF8String:logMessage->function], nil);
     STAssertEqualObjects(@"testError", logMessage->message, nil);
     STAssertTrue([logMessage->formattedMessage length] > [logMessage->message length], nil);
     STAssertFalse([logMessage->formattedMessage rangeOfString:@"testError"].location == NSNotFound, nil);
+    
+    JRLogAssert(1==2);
+    
+    logMessage = [self consumeOnlyMessage];
+    STAssertEquals(JRLogLevel_Assert, logMessage->callerLevel, nil);
+    STAssertFalse([logMessage->instance rangeOfString:@"JRLogTest"].location == NSNotFound, nil);
+    STAssertEqualObjects(@"JRLogTest.m", [[NSString stringWithUTF8String:logMessage->file] lastPathComponent], nil);
+    STAssertEquals((unsigned)__LINE__-6, logMessage->line, nil);
+    STAssertEqualObjects(@"-[JRLogTest testLevels]", [NSString stringWithUTF8String:logMessage->function], nil);
+    STAssertEqualObjects(@"1==2", logMessage->message, nil);
+    STAssertTrue([logMessage->formattedMessage length] > [logMessage->message length], nil);
+    STAssertFalse([logMessage->formattedMessage rangeOfString:@"1==2"].location == NSNotFound, nil);
     
     /** Can't really test fatal since it calls exit(1).
     JRLogFatal(@"testFatal");
@@ -74,12 +85,18 @@
     STAssertEquals(JRLogLevel_Fatal, logMessage->callerLevel, nil);
     STAssertFalse([logMessage->instance rangeOfString:@"JRLogTest"].location == NSNotFound, nil);
     STAssertEqualObjects(@"JRLogTest.m", [[NSString stringWithUTF8String:logMessage->file] lastPathComponent], nil);
-    STAssertEquals((unsigned)71, logMessage->line, nil);
+    STAssertEquals((unsigned)__LINE__-6, logMessage->line, nil);
     STAssertEqualObjects(@"-[JRLogTest testLevels]", [NSString stringWithUTF8String:logMessage->function], nil);
     STAssertEqualObjects(@"testFatal", logMessage->message, nil);
     STAssertTrue([logMessage->formattedMessage length] > [logMessage->message length], nil);
     STAssertFalse([logMessage->formattedMessage rangeOfString:@"testFatal"].location == NSNotFound, nil);
     */
+}
+
+- (void)testCompiletimeLevels {
+    STAssertEquals((unsigned)0, [debugLogger->messages count], nil);
+    
+    // TODO
 }
 
 - (void)testCustomFormatter {
@@ -125,7 +142,7 @@
     STAssertEquals(JRLogLevel_Info, logMessage->callerLevel, nil);
     STAssertFalse([logMessage->instance rangeOfString:@"JRLogTest"].location == NSNotFound, nil);
     STAssertEqualObjects(@"JRLogTest.m", [[NSString stringWithUTF8String:logMessage->file] lastPathComponent], nil);
-    STAssertEquals((unsigned)122, logMessage->line, nil);
+    STAssertEquals((unsigned)__LINE__-6, logMessage->line, nil);
     STAssertEqualObjects(@"-[JRLogTest testNSLogOverride]", [NSString stringWithUTF8String:logMessage->function], nil);
     STAssertEqualObjects(@"testNSLogOverride", logMessage->message, nil);
     STAssertTrue([logMessage->formattedMessage length] > [logMessage->message length], nil);
