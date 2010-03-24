@@ -66,7 +66,7 @@
     STAssertTrue([logMessage->formattedMessage length] > [logMessage->message length], nil);
     STAssertFalse([logMessage->formattedMessage rangeOfString:@"testError"].location == NSNotFound, nil);
     
-    JRLogAssert(1==2);
+    JRLogAssert(1==2, nil);//JRLogAssert(1==2, @"test%@", @"Assert");
     
     logMessage = [self consumeOnlyMessage];
     STAssertEquals(JRLogLevel_Assert, logMessage->callerLevel, nil);
@@ -77,6 +77,19 @@
     STAssertEqualObjects(@"1==2", logMessage->message, nil);
     STAssertTrue([logMessage->formattedMessage length] > [logMessage->message length], nil);
     STAssertFalse([logMessage->formattedMessage rangeOfString:@"1==2"].location == NSNotFound, nil);
+    
+    JRLogAssert(1==2, @"test%@", @"Assert");
+    
+    logMessage = [self consumeOnlyMessage];
+    STAssertEquals(JRLogLevel_Assert, logMessage->callerLevel, nil);
+    STAssertFalse([logMessage->instance rangeOfString:@"JRLogTest"].location == NSNotFound, nil);
+    STAssertEqualObjects(@"JRLogTest.m", [[NSString stringWithUTF8String:logMessage->file] lastPathComponent], nil);
+    STAssertEquals((unsigned)__LINE__-6, logMessage->line, nil);
+    STAssertEqualObjects(@"-[JRLogTest testLevels]", [NSString stringWithUTF8String:logMessage->function], nil);
+    STAssertEqualObjects(@"1==2 (testAssert)", logMessage->message, nil);
+    STAssertTrue([logMessage->formattedMessage length] > [logMessage->message length], nil);
+    STAssertFalse([logMessage->formattedMessage rangeOfString:@"1==2"].location == NSNotFound, nil);
+    STAssertFalse([logMessage->formattedMessage rangeOfString:@"testAssert"].location == NSNotFound, nil);
     
     /** Can't really test fatal since it calls exit(1).
     JRLogFatal(@"testFatal");
