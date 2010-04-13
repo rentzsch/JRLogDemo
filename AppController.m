@@ -7,6 +7,7 @@
 }
 
 - (IBAction)logSomething:(id)sender {
+    JRLogAssert(NO, nil);
     JRLogInfo(@"sender: %@", sender);
 }
 
